@@ -120,9 +120,11 @@ public class EventProcessorAdminService extends AbstractAdmin {
         EventProcessorService eventProcessorService = EventProcessorAdminValueHolder.getEventProcessorService();
         if (eventProcessorService != null) {
             ExecutionPlanConfiguration executionConfiguration = eventProcessorService.getActiveExecutionPlanConfiguration(planName);
-            ExecutionPlanConfigurationDto dto = new ExecutionPlanConfigurationDto();
-            copyConfigurationsToDto(executionConfiguration, dto, null);
-            return dto;
+            if (executionConfiguration != null) {
+                ExecutionPlanConfigurationDto dto = new ExecutionPlanConfigurationDto();
+                copyConfigurationsToDto(executionConfiguration, dto, null);
+                return dto;
+            }
         }
         return null;
     }
